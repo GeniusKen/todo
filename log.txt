@@ -1,0 +1,21 @@
+﻿17:21:57 kwargs,  {'username': '程序猿'} <class 'dict'>
+17:21:57 debug 0
+17:22:01 kwargs,  {'username': '程序猿'} <class 'dict'>
+17:22:02 kwargs,  {'username': '程序猿'} <class 'dict'>
+17:23:14 kwargs,  {'username': '程序猿'} <class 'dict'>
+17:23:15 kwargs,  {'username': '程序猿'} <class 'dict'>
+17:23:17 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:32:35 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:32:35 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:32:44 debug 0
+16:32:44 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:32:49 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:33:01 debug 0
+16:33:01 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:33:05 debug 1
+16:33:05 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:33:09 debug 2
+16:33:09 kwargs,  {'username': '程序猿'} <class 'dict'>
+16:33:53 kwargs,  {'id': 2} <class 'dict'>
+16:33:53 debug 1
+16:33:53 kwargs,  {'username': '程序猿'} <class 'dict'>

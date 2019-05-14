@@ -1,0 +1,134 @@
+<html>
+<head>
+    <title>Todo</title>
+    <link rel="stylesheet" href={{ url_for("static",filename="css/pure-min.css") }}>
+    <style type="text/css">
+    .todo-table {
+        margin: 0 auto;
+    }
+    .center {
+        text-align: center;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      margin: 10px auto;
+      padding: 30px;
+      width: 200px;
+      border: 1px dashed #ccc;
+      border-radius: 8px;
+      text-align: center;
+      background: #eee;
+    }
+    button {
+      margin-top: 20px;
+    }
+    button {
+      height: 30px;
+      width: 70px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+    }
+    button:last-of-type {
+      margin-left: 10px;
+    }
+    span {
+      font-size: 60px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <h1>{{ username }}的Todo</h1>
+        <form method = "get" action= {{ url_for(".logout") }}>
+            <button type="submit">退出</button>
+        </form>
+        <form action={{ url_for("todo.add") }} method="post">
+            <input type="text" placeholder="Add Todo" name="title">
+            <input class="pure-button pure-button-primary" type="submit" value="Add">
+        </form>
+    </div>
+
+    <table class="todo-table pure-table pure-table-horizontal pure-table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for t in todos %}
+            <tr>
+                <td>{{ t.id }}</td>
+                {% if t.completed %}
+                    <td><del><a href={{ url_for('todo.completed',todo_id = t.id) }}>{{ t.title }}</a></del></td>
+                {% else %}
+                    <td><a href={{ url_for('todo.completed',todo_id = t.id) }}>{{ t.title }}</a></td>
+                {% endif %}
+                <td>{{ t.ut }}</td>
+                <td><a href={{ url_for('todo.delete', todo_id=t.id) }}>delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="box">
+        <div class="timer">
+            <span id="min">30</span>
+            <span>:</span>
+            <span id="sec">00</span>
+        </div>
+        <button id="btn1">开始计时</button>
+        <button id="btn2">重置时间</button>
+    </div>
+</body>
+<script>
+  var btn1 = document.getElementById('btn1')
+  var btn2 = document.getElementById('btn2')
+  var min = document.getElementById('min')
+  var sec = document.getElementById('sec')
+  var flag = false
+  var timer = null
+  var minTime = 29
+  var secTime = 59
+  btn1.onclick = function () {
+    if (flag) {
+      flag = false
+      clearInterval(timer)
+      btn1.innerText = '开始计时'
+    } else {
+      flag = true
+      btn1.innerText = '暂停计时'
+      timer = setInterval(() => {
+        if (Number(minTime) === 0 && Number(secTime) === 0) {
+          clearInterval(timer)
+          sec.innerText = 00
+          min.innerText = 30
+          btn1.innerText = '开始计时'
+          flag = false
+        }
+        sec.innerText = secTime < 10 ? '0' + secTime : secTime
+        min.innerText = minTime < 10 ? '0' + minTime : minTime
+        if (Number(secTime) <= 0 && Number(minTime) >= 0) {
+          secTime = 60
+          minTime--
+        }
+        secTime--
+      }, 1000);
+    }
+  }
+  btn2.onclick = function () {
+    clearInterval(timer)
+    flag = false
+    btn1.innerText = '开始计时'
+    minTime = 29
+    secTime = 59
+    sec.innerText = '00'
+    min.innerText = '30'
+  }
+</script>
+</html>
